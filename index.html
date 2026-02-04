@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gusto & Sapori | Cucina Italiana con American Twist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #d4af37;
+            --dark: #121212;
+            --neon-red: #ff3131;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: #fff;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        .ampersand {
+            color: var(--neon-red);
+            text-shadow: 0 0 10px var(--neon-red), 0 0 20px var(--neon-red);
+            font-style: italic;
+        }
+
+        .gold-text { color: var(--gold); }
+        .gold-bg { background-color: var(--gold); }
+
+        .menu-card {
+            background: rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .menu-card:hover {
+            transform: translateX(10px);
+            border-left: 4px solid var(--gold);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: var(--gold);
+            color: var(--dark);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* Stile per il logo immagine */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            /* Se l'immagine non esiste, non mostriamo un quadrato rotto gigante */
+            min-width: 10px;
+        }
+
+        /* Effetto per quando l'immagine non carica nell'anteprima */
+        .logo-img:not([src]) {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigazione -->
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="logo-container">
+                        <!-- L'immagine cercherà la tua cartella locale quando aprirai il file dal PC -->
+                        <img src="Images/unnamed.jpg" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+                        <!-- Icona di riserva se il logo non carica -->
+                        <i class="fas fa-utensils gold-text text-2xl sm:hidden" id="fallback-icon"></i>
+                        <span class="text-xl font-bold tracking-tighter brand-font uppercase">
+                            GUSTO <span class="ampersand">&</span> SAPORI
+                        </span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link hover:text-gold-text">Home</a>
+                    <a href="#menu" class="nav-link hover:text-gold-text">Menu</a>
+                    <a href="#about" class="nav-link hover:text-gold-text">Chi Siamo</a>
+                    <a href="#contact" class="nav-link hover:text-gold-text">Contatti</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black p-4 space-y-4 text-center border-b border-white/10">
+            <a href="#home" class="block">Home</a>
+            <a href="#menu" class="block">Menu</a>
+            <a href="#about" class="block">Chi Siamo</a>
+            <a href="#contact" class="block">Contatti</a>
+        </div>
+    </nav>
+
+    <!-- Sezione Hero -->
+    <section id="home" class="hero-bg flex items-center justify-center text-center px-4">
+        <div class="max-w-3xl">
+            <h1 class="text-5xl md:text-8xl mb-6 uppercase">Gusto <span class="ampersand">&</span> Sapori</h1>
+            <p class="text-xl md:text-2xl mb-10 text-gray-300 font-light tracking-widest uppercase">La tradizione incontra l'American Twist</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#menu" class="btn-primary px-8 py-4 rounded-full uppercase text-sm">Scopri il Menu</a>
+                <a href="#contact" class="border-2 border-white px-8 py-4 rounded-full uppercase text-sm hover:bg-white hover:text-black transition-all">Prenota un tavolo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sezione Menu -->
+    <section id="menu" class="py-24 bg-[#0a0a0a]">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl mb-4 uppercase">I Nostri Piatti</h2>
+                <div class="w-24 h-1 bg-gold mx-auto gold-bg"></div>
+            </div>
+
+            <!-- Categoria: Starters -->
+            <div class="mb-16">
+                <h3 class="text-2xl gold-text mb-8 flex items-center uppercase tracking-widest"><i class="fas fa-utensils mr-3"></i> Starters</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="menu-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-xl font-semibold uppercase">Wings & Sauce</h4>
+                            <span class="gold-text font-bold">€12</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Alette di pollo marinate, servite con salsa barbecue artigianale e Blue Cheese.</p>
+                    </div>
+                    <div class="menu-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-xl font-semibold uppercase">Crispy Burrata</h4>
+                            <span class="gold-text font-bold">€11</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Burrata impanata e fritta su letto di pomodoro spicy e basilico fritto.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categoria: Signature Mains -->
+            <div class="mb-16">
+                <h3 class="text-2xl gold-text mb-8 flex items-center uppercase tracking-widest"><i class="fas fa-fire mr-3"></i> Signature Mains</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="menu-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-xl font-semibold uppercase">The G&S Burger</h4>
+                            <span class="gold-text font-bold">€16</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">200g Black Angus, bacon croccante, cipolla caramellata, cheddar e salsa segreta.</p>
+                    </div>
+                    <div class="menu-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-xl font-semibold uppercase">Ribs in Smokey BBQ</h4>
+                            <span class="gold-text font-bold">€19</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Costine di maiale cotte 12h, glassate al miele e fumo di faggio.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categoria: Sweets -->
+            <div>
+                <h3 class="text-2xl gold-text mb-8 flex items-center uppercase tracking-widest"><i class="fas fa-ice-cream mr-3"></i> Sweet Endings</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="menu-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-xl font-semibold uppercase">NY Cheesecake</h4>
+                            <span class="gold-text font-bold">€7</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">La ricetta originale di New York con coulis di fragole fresche.</p>
+                    </div>
+                    <div class="menu-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="text-xl font-semibold uppercase">Choco-Lava Brownie</h4>
+                            <span class="gold-text font-bold">€8</span>
+                        </div>
+                        <p class="text-gray-400 text-sm italic">Brownie caldo al cioccolato fondente con gelato alla vaniglia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sezione Chi Siamo -->
+    <section id="about" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Interno Ristorante" class="rounded-lg shadow-2xl">
+                <div class="absolute -bottom-6 -right-6 bg-gold p-8 hidden md:block gold-bg text-black font-bold">
+                    Dal 2024
+                </div>
+            </div>
+            <div>
+                <h2 class="text-4xl mb-6 uppercase">La Nostra Storia</h2>
+                <p class="text-gray-400 mb-6 leading-relaxed">
+                    Nati dalla passione per il buon cibo e influenzati dal dinamismo delle grandi metropoli, **Gusto & Sapori** non è solo un ristorante, è un'esperienza sensoriale.
+                </p>
+                <p class="text-gray-400 mb-8 leading-relaxed">
+                    Abbiamo preso le radici della cucina italiana e le abbiamo contaminate con tecniche internazionali e un pizzico di audacia americana. Usiamo solo materie prime d'eccellenza, cucinate con amore e servite con un sorriso.
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-center uppercase text-xs tracking-widest"><i class="fas fa-check gold-text mr-3"></i> Ingredienti Bio & Locali</li>
+                    <li class="flex items-center uppercase text-xs tracking-widest"><i class="fas fa-check gold-text mr-3"></i> Carne Black Angus Certificata</li>
+                    <li class="flex items-center uppercase text-xs tracking-widest"><i class="fas fa-check gold-text mr-3"></i> Cocktails d'Autore</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sezione Contatti -->
+    <section id="contact" class="py-24 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl mb-4 uppercase">Prenota un Tavolo</h2>
+                <p class="text-gray-400">Ti aspettiamo per una cena indimenticabile</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                <div class="p-8 border border-white/10 rounded-xl hover:border-gold transition-colors">
+                    <i class="fas fa-map-marker-alt text-3xl gold-text mb-4"></i>
+                    <h4 class="text-xl mb-2 uppercase tracking-widest">Dove Siamo</h4>
+                    <p class="text-gray-400 italic">Via della Cucina 45, Milano</p>
+                </div>
+                <div class="p-8 border border-white/10 rounded-xl hover:border-gold transition-colors">
+                    <i class="fas fa-phone text-3xl gold-text mb-4"></i>
+                    <h4 class="text-xl mb-2 uppercase tracking-widest">Chiamaci</h4>
+                    <p class="text-gray-400 italic">+39 012 3456789</p>
+                </div>
+                <div class="p-8 border border-white/10 rounded-xl hover:border-gold transition-colors">
+                    <i class="fas fa-clock text-3xl gold-text mb-4"></i>
+                    <h4 class="text-xl mb-2 uppercase tracking-widest">Orari</h4>
+                    <p class="text-gray-400 italic text-sm">Lun-Dom: 12:00-15:00 / 19:00-00:00</p>
+                </div>
+            </div>
+
+            <!-- Modulo Prenotazione Semplificato -->
+            <form class="max-w-2xl mx-auto mt-16 space-y-4">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <input type="text" placeholder="Nome" class="bg-white/5 border border-white/10 p-4 rounded-lg focus:outline-none focus:border-gold w-full text-white">
+                    <input type="email" placeholder="Email" class="bg-white/5 border border-white/10 p-4 rounded-lg focus:outline-none focus:border-gold w-full text-white">
+                </div>
+                <input type="date" class="bg-white/5 border border-white/10 p-4 rounded-lg focus:outline-none focus:border-gold w-full text-white">
+                <button type="button" onclick="alert('Grazie! Ti ricontatteremo a breve.')" class="btn-primary w-full py-4 rounded-lg uppercase">Invia Richiesta</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-white/10 text-center">
+        <div class="mb-8">
+            <span class="text-2xl font-bold brand-font uppercase text-white">GUSTO <span class="ampersand">&</span> SAPORI</span>
+        </div>
+        <div class="flex justify-center space-x-6 mb-8 text-2xl">
+            <a href="#" class="hover:text-gold-text transition-colors"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-gold-text transition-colors"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="hover:text-gold-text transition-colors"><i class="fab fa-tripadvisor"></i></a>
+        </div>
+        <p class="text-gray-500 text-xs uppercase tracking-widest">&copy; 2024 Gusto & Sapori. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script>
+        // Gestione Menu Mobile
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Chiudi menu mobile al click sui link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
